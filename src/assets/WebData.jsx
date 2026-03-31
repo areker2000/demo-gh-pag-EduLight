@@ -36,7 +36,7 @@ export const newsData = [
       '我們致力於打造一個結合知識與技能的多元學習平台，提供一對一真人教學，涵蓋學科、創作與體育等多元課程。',
       '您可自由選擇教師、彈性安排上課時間，享受即時互動與高效學習體驗。',
       '邀請您一同加入，開啟更自在且有溫度的學習旅程。',
-      '(結帳時輸入「new100」即可享100元折價優惠)',
+      '(結帳時輸入「new100」即可享100元折價優惠碼)',
     ],
     imgUrl:
       'https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',

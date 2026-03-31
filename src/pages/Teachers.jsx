@@ -5,6 +5,7 @@ import TeacherModal from '../components/modals/TeacherModal';
 import { useAuth } from '../context/AuthContext';
 import LoadingBlock from '../components/LoadingBlock';
 import PageTitle from '../components/PageTitle';
+import SearchUnit from '../components/SearchUnit';
 
 const Teachers = () => {
   const { API_BASE, API_PATH, setFullLoadingText, setIsFullLoading } =
@@ -85,7 +86,7 @@ const Teachers = () => {
       <div className="flex items-center space-x-4 mb-8">
         <span className="text-gray-500">篩選條件：</span>
         <select
-          className="bg-white border border-gray-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 outline-none"
+          className="bg-white border border-gray-200 rounded-lg px-4 py-2 mr-8 focus:ring-2 focus:ring-emerald-500 outline-none"
           onChange={(e) => setSelectedFilter(e.target.value)}
           disabled={isLoading}
         >
@@ -96,27 +97,14 @@ const Teachers = () => {
             </option>
           ))}
         </select>
-        <input
-          type="text"
-          className="bg-white border border-gray-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500/30 outline-none ml-8 mr-2"
-          placeholder="搜尋科目名稱或教師"
-          onChange={(e) => setTmpQueryInput(e.target.value)}
-          onKeyUp={(e) => {
-            if (e.key === 'Enter') {
-              handleSearch();
-            }
-          }}
-          disabled={isLoading}
-        />
 
-        <button
-          type="button"
-          className="bg-white border border-gray-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500 outline-none"
-          onClick={() => handleSearch()}
+        <SearchUnit
+          placeholder="搜尋科目名稱或教師"
           disabled={isLoading}
-        >
-          搜尋
-        </button>
+          textValue={tmpQueryInput}
+          textChangeFunc={(e) => setTmpQueryInput(e.target.value)}
+          btnClickFunc={handleSearch}
+        />
       </div>
 
       {isLoading ? (

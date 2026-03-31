@@ -16,14 +16,12 @@ const AuthProvider = ({ children }) => {
     setIsFullLoading(true);
   };
 
-  const hideFullLoading = () => setIsFullLoading(false);
-
   const loginSetting = (username) => {
     setUser(username);
     setIsLogin(true);
     showFullLoading('登入中');
     setTimeout(() => {
-      hideFullLoading();
+      setIsFullLoading(false);
     }, 1000);
   };
   const logoutSettings = () => {
@@ -31,7 +29,7 @@ const AuthProvider = ({ children }) => {
     setIsLogin(false);
     showFullLoading('登出中');
     setTimeout(() => {
-      hideFullLoading();
+      setIsFullLoading(false);
     }, 1000);
   };
 
@@ -51,7 +49,6 @@ const AuthProvider = ({ children }) => {
         fullLoadingText,
         setFullLoadingText,
         showFullLoading,
-        hideFullLoading,
       }}
     >
       {children}

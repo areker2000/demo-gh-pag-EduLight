@@ -1,11 +1,12 @@
 import { useForm } from 'react-hook-form';
-import { NavLink, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import FormInput from '../components/FormInput';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 import checkIcon from '../assets/icon/tickMark.png';
 import FilledButton from '../components/buttons/FilledButton';
+import GotoButton from '../components/buttons/GotoButton';
 
 const Login = () => {
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -58,6 +59,11 @@ const Login = () => {
               <h1 className="text-3xl font-bold text-gray-800">登入</h1>
               <p className="text-gray-400 mt-3 text-sm">
                 歡迎回到 EduLight，開始您的學習旅程
+              </p>
+              <p className="text-gray-400 text-sm text-center pt-2">
+                (輸入<span className="underline font-bold">使用者名稱</span>
+                與符合規則的<span className="underline font-bold">密碼</span>
+                即可模擬登入)
               </p>
             </div>
 
@@ -159,35 +165,11 @@ const Login = () => {
                 disabled={false}
                 text={'登入'}
               />
-              <p className="text-gray-400 text-sm text-center">
-                (輸入<span className="underline font-bold">使用者名稱</span>
-                與符合規則的<span className="underline font-bold">密碼</span>
-                即可模擬登入)
-              </p>
             </form>
           </div>
 
-          <div className="text-center mt-8">
-            <NavLink
-              to={'/'}
-              className="text-gray-400 hover:text-gray-600 text-sm flex items-center justify-center transition"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                />
-              </svg>
-              回到首頁
-            </NavLink>
+          <div className="text-center mt-8 flex items-center justify-center">
+            <GotoButton target={'/'} text={'回到首頁'} />
           </div>
         </div>
       </div>

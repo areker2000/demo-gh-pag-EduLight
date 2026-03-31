@@ -18,6 +18,8 @@ import { couponsData } from '../assets/WebData';
 import RemoveButton from '../components/buttons/RemoveButton';
 import { useNavigate } from 'react-router';
 import PageTitle from '../components/PageTitle';
+import GotoButton from '../components/buttons/GotoButton';
+import SuccessOverlay from '../components/SuccessOverlay';
 
 const Cart = () => {
   const [cartData, setCartData] = useState(null);
@@ -25,6 +27,7 @@ const Cart = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [editId, setEditId] = useState('');
   const [tmpFinalPrice, setTmpFinalPrice] = useState(0);
+  const [finalPrice, setFinalPrice] = useState(0);
   const {
     isLogin,
     isFullLoading,
@@ -113,7 +116,8 @@ const Cart = () => {
   const [wrongCouponText, setWrongCouponText] = useState('false');
   const [discount, setDiscount] = useState(0);
   const [tmpCoupon, setTmpCoupon] = useState('');
-
+  const [isShowSuccess, setIsShowSuccess] = useState(false);
+  const [orderId, setOrderId] = useState('');
   const couponCheck = () => {
     const checkedCoupon = couponsData.filter(
       (coupon) => coupon.code === tmpCoupon,
@@ -219,6 +223,7 @@ const Cart = () => {
     try {
       setFullLoadingText('訂單處理中，請稍候');
       setIsFullLoading(true);
+      setFinalPrice(tmpFinalPrice - discount);
       const data = {
         user: {
           name: formData.cardName,
@@ -246,6 +251,8 @@ const Cart = () => {
       setDiscount(0);
       setIsCoupon(false);
       reset();
+      setOrderId(res.data.create_at);
+      setIsShowSuccess(true);
       getCart();
     } catch (error) {
       console.error('送出訂單失敗', error);
@@ -279,6 +286,9 @@ const Cart = () => {
                   <p className="text-gray-400">
                     購物車裡沒有東西，快去選門有興趣的課吧！
                   </p>
+                  <div className="text-center flex items-center justify-center pt-6">
+                    <GotoButton target={'/teachers'} text={'去找課程'} />
+                  </div>
                 </div>
               ) : (
                 <>
@@ -526,6 +536,13 @@ const Cart = () => {
           </div>
         </div>
       </div>
+      <SuccessOverlay
+        isOpen={isShowSuccess}
+        onClose={() => setIsShowSuccess(false)}
+        orderId={orderId}
+        finalPrice={finalPrice}
+      />
+
       <TeacherModal
         isOpen={isShowModal}
         confirmFunc={updateCart}
